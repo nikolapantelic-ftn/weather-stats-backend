@@ -38,7 +38,6 @@ public class CityController {
                     ))
             })
     })
-
     @GetMapping()
     public List<CityViewDTO> getAll() {
         List<City> allCities = service.get();
