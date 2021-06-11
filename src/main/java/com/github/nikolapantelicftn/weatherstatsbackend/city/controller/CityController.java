@@ -3,7 +3,14 @@ package com.github.nikolapantelicftn.weatherstatsbackend.city.controller;
 import com.github.nikolapantelicftn.weatherstatsbackend.city.controller.dto.CityViewDTO;
 import com.github.nikolapantelicftn.weatherstatsbackend.city.model.City;
 import com.github.nikolapantelicftn.weatherstatsbackend.city.service.CityService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +29,15 @@ public class CityController {
         this.service = service;
         this.mapper = mapper;
     }
+
+    @Operation(summary = "Gets all cities")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Array of cities", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(
+                            schema = @Schema(implementation = CityViewDTO.class)
+                    ))
+            })
+    })
 
     @GetMapping()
     public List<CityViewDTO> getAll() {

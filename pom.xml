@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<modelmapper.version>2.4.2</modelmapper.version>
+		<open-api.version>1.5.9</open-api.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -25,6 +26,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${open-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.modelmapper</groupId>
