@@ -60,10 +60,4 @@ public class CityService {
         return repository.findAll();
     }
 
-    @Transactional(readOnly = true)
-    public City get(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("City not found."));
-    }
-
 }
