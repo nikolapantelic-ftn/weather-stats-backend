@@ -2,6 +2,7 @@ package com.github.nikolapantelicftn.weatherstatsbackend.temperature.service;
 
 import com.github.nikolapantelicftn.weatherstatsbackend.city.model.City;
 import com.github.nikolapantelicftn.weatherstatsbackend.city.service.CityService;
+import com.github.nikolapantelicftn.weatherstatsbackend.exceptions.EntityExistsException;
 import com.github.nikolapantelicftn.weatherstatsbackend.http.client.WeatherClient;
 import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
 import com.github.nikolapantelicftn.weatherstatsbackend.temperature.repository.DayReportRepository;
@@ -83,8 +84,7 @@ public class ReportService {
     public DayReport create(DayReport newReport) {
         Objects.requireNonNull(newReport);
         if (newReport.getId() != null && repository.existsById(newReport.getId())) {
-            // TODO: Add custom exceptions
-            throw new RuntimeException("Day report exists");
+            throw new EntityExistsException("Day report exists");
         }
         return repository.save(newReport);
     }

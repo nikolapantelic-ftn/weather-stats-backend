@@ -1,7 +1,6 @@
 package com.github.nikolapantelicftn.weatherstatsbackend.http.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -54,9 +53,8 @@ public class WeatherResponseDeserializer extends JsonDeserializer<WeatherRespons
                 hourReports.stream().collect(Collectors.groupingBy(hourReport -> hourReport.getTime().toLocalDate()));
 
         List<DayReport> dayReports = new ArrayList<>();
-        groupedHourReports.keySet().forEach(key -> {
-            dayReports.add(new DayReport(key, groupedHourReports.get(key)));
-        });
+        groupedHourReports.keySet()
+                .forEach(key -> dayReports.add(new DayReport(key, groupedHourReports.get(key))));
 
         return dayReports;
     }

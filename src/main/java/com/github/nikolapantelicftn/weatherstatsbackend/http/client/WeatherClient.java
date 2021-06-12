@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.nikolapantelicftn.weatherstatsbackend.config.ConfigProperties;
+import com.github.nikolapantelicftn.weatherstatsbackend.exceptions.ApiException;
 import com.github.nikolapantelicftn.weatherstatsbackend.http.deserializer.WeatherResponseDeserializer;
 import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
 import org.springframework.http.HttpHeaders;
@@ -49,8 +50,7 @@ public class WeatherClient {
             WeatherResponse weather = mapper.readValue(response, WeatherResponse.class);
             return weather.getWeatherReport();
         } catch (JsonProcessingException e) {
-            // TODO: Add custom exception
-            throw new RuntimeException("Error parsing api response");
+            throw new ApiException("Error parsing API response!");
         }
     }
 

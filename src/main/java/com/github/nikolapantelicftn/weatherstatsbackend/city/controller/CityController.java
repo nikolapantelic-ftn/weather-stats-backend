@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,6 +45,12 @@ public class CityController {
         return allCities.stream()
                 .map(city -> mapper.map(city, CityViewDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("{cityName}")
+    public CityViewDTO get(@PathVariable String cityName) {
+        City found = service.get(cityName);
+        return mapper.map(found, CityViewDTO.class);
     }
 
 }

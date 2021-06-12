@@ -1,6 +1,7 @@
 package com.github.nikolapantelicftn.weatherstatsbackend.city.model;
 
 import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.Temperature;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -40,6 +41,11 @@ public class City {
 
     public void setDayReports(List<DayReport> dayReports) {
         this.dayReports = dayReports;
+    }
+
+    public Temperature getAverage() {
+        double average = this.dayReports.stream().mapToDouble(report -> report.getAverage().getValue()).average().orElse(0);
+        return new Temperature(average);
     }
 
 }
