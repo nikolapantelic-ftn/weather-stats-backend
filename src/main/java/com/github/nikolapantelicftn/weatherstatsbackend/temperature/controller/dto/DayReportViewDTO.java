@@ -1,6 +1,6 @@
 package com.github.nikolapantelicftn.weatherstatsbackend.temperature.controller.dto;
 
-import com.github.nikolapantelicftn.weatherstatsbackend.city.model.City;
+import com.github.nikolapantelicftn.weatherstatsbackend.city.controller.dto.CityViewDTO;
 import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.Temperature;
 
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.List;
 public class DayReportViewDTO {
 
     private Long id;
-    private City city;
+    private CityViewDTO city;
     private LocalDate date;
     private Temperature average;
     private List<HourReportViewDTO> hourReports;
@@ -22,11 +22,11 @@ public class DayReportViewDTO {
         this.id = id;
     }
 
-    public City getCity() {
+    public CityViewDTO getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(CityViewDTO city) {
         this.city = city;
     }
 

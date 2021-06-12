@@ -2,11 +2,12 @@ package com.github.nikolapantelicftn.weatherstatsbackend.temperature.model;
 
 import com.github.nikolapantelicftn.weatherstatsbackend.city.model.City;
 
-import javax.persistence.Embedded;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
@@ -16,22 +17,28 @@ import java.util.List;
 public class DayReport {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private City city;
     private LocalDate date;
-    @Embedded
-    private Temperature average;
-    @OneToMany(mappedBy = "day_reports")
+    @JoinColumn(name = "city_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private City city;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<HourReport> hourReports;
+
+    public DayReport(LocalDate date, List<HourReport> hourReports) {
+        this.date = date;
+        this.hourReports = hourReports;
+    }
+
+    protected DayReport() {}
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public LocalDate getDate() {
+        return date;
     }
 
     public City getCity() {
@@ -42,28 +49,15 @@ public class DayReport {
         this.city = city;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public Temperature getAverage() {
-        return average;
-    }
-
-    public void setAverage(Temperature average) {
-        this.average = average;
+        double avg = hourReports.stream().
+                mapToDouble(report -> report.getTemperature().getValue())
+                .average().orElse(0);
+        return new Temperature(avg);
     }
 
     public List<HourReport> getHourReports() {
         return hourReports;
-    }
-
-    public void setHourReports(List<HourReport> hourReports) {
-        this.hourReports = hourReports;
     }
 
 }

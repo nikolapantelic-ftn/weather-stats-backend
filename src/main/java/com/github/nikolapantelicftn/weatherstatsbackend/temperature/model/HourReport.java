@@ -17,6 +17,18 @@ public class HourReport {
     @Embedded
     private Temperature temperature;
 
+    public HourReport(LocalDateTime time, Temperature temperature) {
+        this.time = time;
+        this.temperature = temperature;
+    }
+
+    public HourReport(LocalDateTime time, Double temperature) {
+        this.time = time;
+        this.temperature = new Temperature(temperature);
+    }
+
+    protected HourReport() {}
+
     public Long getId() {
         return id;
     }

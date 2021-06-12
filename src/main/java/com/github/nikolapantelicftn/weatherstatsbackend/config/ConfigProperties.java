@@ -10,6 +10,8 @@ import java.util.List;
 public class ConfigProperties {
 
     private List<String> cities;
+    private String weatherApi;
+    private String apiKey;
 
     public List<String> getCities() {
         return cities;
@@ -17,6 +19,22 @@ public class ConfigProperties {
 
     public void setCities(List<String> cityNames) {
         this.cities = cityNames;
+    }
+
+    public String getWeatherApi() {
+        return weatherApi;
+    }
+
+    public void setWeatherApi(String weatherApi) {
+        this.weatherApi = weatherApi;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
 }

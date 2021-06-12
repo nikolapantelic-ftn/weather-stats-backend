@@ -26,8 +26,8 @@ public class ReportController {
     }
 
     @GetMapping
-    public List<DayReportViewDTO> get(@RequestParam LocalDate from, @RequestParam LocalDate to) {
-        List<DayReport> found = service.get(from, to);
+    public List<DayReportViewDTO> get(@RequestParam String from, @RequestParam String to) {
+        List<DayReport> found = service.get(LocalDate.parse(from), LocalDate.parse(to));
         return found.stream()
                 .map(report -> mapper.map(report, DayReportViewDTO.class))
                 .collect(Collectors.toList());
