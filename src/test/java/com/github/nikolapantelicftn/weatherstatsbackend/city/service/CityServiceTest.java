@@ -14,9 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 class CityServiceTest {
@@ -31,15 +31,15 @@ class CityServiceTest {
 
     @Test
     void create_Success() {
-        City newCity = new City(CITY_NAME);
+        City expected = new City(CITY_NAME);
 
-        Mockito.when(repository.save(newCity)).thenReturn(newCity);
+        Mockito.when(repository.save(expected)).thenReturn(expected);
 
-        City result = service.create(newCity);
+        City result = service.create(expected);
 
-        Mockito.verify(repository, Mockito.times(1)).save(newCity);
+        Mockito.verify(repository, Mockito.times(1)).save(expected);
 
-        assertEquals(newCity, result);
+        assertEquals(expected, result);
     }
 
     @Test
@@ -63,13 +63,13 @@ class CityServiceTest {
 
     @Test
     void getByCityName_Success() {
-        City newCity = new City(CITY_NAME);
+        City expected = new City(CITY_NAME);
 
-        Mockito.when(repository.findByCityName(CITY_NAME)).thenReturn(Optional.of(newCity));
+        Mockito.when(repository.findByCityName(CITY_NAME)).thenReturn(Optional.of(expected));
 
         City result = service.get(CITY_NAME);
 
-        assertEquals(newCity, result);
+        assertEquals(expected, result);
     }
 
     @Test
@@ -83,12 +83,12 @@ class CityServiceTest {
 
     @Test
     void getAll_Success() {
-        List<City> cities = List.of(new City(CITY_NAME));
-        Mockito.when(repository.findAll()).thenReturn(cities);
+        List<City> expected = List.of(new City(CITY_NAME));
+        Mockito.when(repository.findAllSorted()).thenReturn(expected);
 
         List<City> result = service.get();
 
-        assertTrue(cities.containsAll(result) && result.containsAll(cities));
+        assertThat(result).hasSameElementsAs(expected);
     }
 
 }

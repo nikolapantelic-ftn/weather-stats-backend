@@ -10,11 +10,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,28 +34,28 @@ class ReportServiceTest {
     @Test
     void getAll_Success() {
         List<HourReport> hourReports = List.of(new HourReport(NOW, 0d));
-        List<DayReport> reports = List.of(new DayReport(NOW.toLocalDate(), hourReports));
-        when(repository.findAll()).thenReturn(reports);
+        List<DayReport> expected = List.of(new DayReport(NOW.toLocalDate(), hourReports));
+        when(repository.findAll()).thenReturn(expected);
 
         List<DayReport> result = service.get();
 
-        assertTrue(hourReports.containsAll(result) && result.containsAll(hourReports));
+        assertThat(result).hasSameElementsAs(expected);
     }
 
     @Test
     void create_Success() {
         List<HourReport> hourReports = List.of(new HourReport(NOW, 0d));
-        DayReport dayReport = new DayReport(NOW.toLocalDate(), hourReports);
-        when(repository.save(dayReport)).thenReturn(dayReport);
+        DayReport expected = new DayReport(NOW.toLocalDate(), hourReports);
+        when(repository.save(expected)).thenReturn(expected);
 
-        DayReport result = service.create(dayReport);
+        DayReport result = service.create(expected);
 
-        assertEquals(dayReport, result);
+        assertEquals(expected, result);
     }
 
     @Test
     void create_DayReportExists() {
-        Long id = 1L;
+        final Long id = 1L;
         List<HourReport> hourReports = List.of(new HourReport(NOW, 0d));
         DayReport dayReport = new DayReport(id, NOW.toLocalDate(), hourReports);
         when(repository.existsById(id)).thenReturn(true);
@@ -70,35 +70,35 @@ class ReportServiceTest {
 
     @Test
     void getByDates_Success() {
-        LocalDateTime tomorrow = NOW.plus(Duration.ofDays(1));
+        LocalDateTime tomorrow = NOW.plusDays(1);
         List<LocalDate> dates = List.of(NOW.toLocalDate(), tomorrow.toLocalDate());
         List<HourReport> todaysHourReports = List.of(new HourReport(NOW, 0d));
         List<HourReport> tomorrowsHourReports = List.of(new HourReport(tomorrow, 0d));
         DayReport todaysDayReport = new DayReport(NOW.toLocalDate(), todaysHourReports);
         DayReport tomorrowsDayReport = new DayReport(tomorrow.toLocalDate(), tomorrowsHourReports);
-        List<DayReport> reports = List.of(todaysDayReport, tomorrowsDayReport);
-        when(repository.findByDateIn(dates)).thenReturn(reports);
+        List<DayReport> expected = List.of(todaysDayReport, tomorrowsDayReport);
+        when(repository.findByDateIn(dates)).thenReturn(expected);
 
         List<DayReport> result = service.get(dates);
 
-        assertTrue(reports.containsAll(result) && result.containsAll(reports));
+        assertThat(result).hasSameElementsAs(expected);
     }
 
     @Test
     void getByDateInterval_Success() {
-        LocalDateTime tomorrow = NOW.plus(Duration.ofDays(1));
+        LocalDateTime tomorrow = NOW.plusDays(1);
         List<LocalDate> dates = List.of(NOW.toLocalDate(), tomorrow.toLocalDate());
         List<HourReport> todaysHourReports = List.of(new HourReport(NOW, 0d));
         List<HourReport> tomorrowsHourReports = List.of(new HourReport(tomorrow, 0d));
         DayReport todaysDayReport = new DayReport(NOW.toLocalDate(), todaysHourReports);
         DayReport tomorrowsDayReport = new DayReport(tomorrow.toLocalDate(), tomorrowsHourReports);
-        List<DayReport> reports = List.of(todaysDayReport, tomorrowsDayReport);
+        List<DayReport> expected = List.of(todaysDayReport, tomorrowsDayReport);
 
-        when(repository.findByDateIn(dates)).thenReturn(reports);
+        when(repository.findByDateIn(dates)).thenReturn(expected);
 
         List<DayReport> result = service.get(NOW.toLocalDate(), tomorrow.toLocalDate());
 
-        assertTrue(reports.containsAll(result) && result.containsAll(reports));
+        assertThat(result).hasSameElementsAs(expected);
     }
 
     @Test
