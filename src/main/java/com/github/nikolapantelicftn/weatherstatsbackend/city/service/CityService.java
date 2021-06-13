@@ -60,7 +60,7 @@ public class CityService {
     @Transactional(readOnly = true)
     public List<City> get() {
         log.info("Fetching all cities.");
-        return repository.findAll();
+        return repository.findAllSorted();
     }
 
 }
