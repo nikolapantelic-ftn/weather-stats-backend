@@ -60,10 +60,11 @@ class CityIntegrationTest {
     @Test
     void getByCityName_Success() throws Exception {
         final String cityName = "London";
-        City london = repository.findByCityName(cityName).orElseThrow();
+        final String countryCode = "UK";
+        City london = repository.findByCountryCodeAndName(countryCode, cityName).orElseThrow();
         CityViewDTO expected = modelMapper.map(london, CityViewDTO.class);
 
-        MvcResult result = mvc.perform(get("/api/cities/" + cityName)
+        MvcResult result = mvc.perform(get("/api/cities/" + countryCode + "/" + cityName)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content()
@@ -79,7 +80,8 @@ class CityIntegrationTest {
     @Test
     void getByCityName_NotFound() throws Exception {
         final String cityName = "Non existent city";
-        mvc.perform(get("/api/cities/" + cityName)
+        final String countryCode = "UK";
+        mvc.perform(get("/api/cities/" + countryCode + "/" + cityName)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }

@@ -9,6 +9,7 @@ public class CityViewDTO {
 
     private Long id;
     private String name;
+    private String countryCode;
     private Temperature average;
     private List<CityDayReportDTO> dayReports;
 
@@ -28,6 +29,14 @@ public class CityViewDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public Temperature getAverage() {

@@ -8,7 +8,6 @@ public class ScheduledUpdate {
 
     private final ReportService service;
 
-
     public ScheduledUpdate(ReportService service) {
         this.service = service;
     }

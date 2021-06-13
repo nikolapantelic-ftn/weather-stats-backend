@@ -39,7 +39,7 @@ public class CityController {
                     ))
             })
     })
-    @GetMapping()
+    @GetMapping
     public List<CityViewDTO> getAll() {
         List<City> allCities = service.get();
         return allCities.stream()
@@ -47,7 +47,7 @@ public class CityController {
                 .collect(Collectors.toList());
     }
 
-    @Operation(summary = "Gets a city and its weather reports by city name")
+    @Operation(summary = "Gets a city and its weather reports by city name and country code")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found city", content = {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -55,9 +55,9 @@ public class CityController {
                     )
             })
     })
-    @GetMapping("{cityName}")
-    public CityViewDTO get(@PathVariable String cityName) {
-        City found = service.get(cityName);
+    @GetMapping("{countryCode}/{cityName}")
+    public CityViewDTO get(@PathVariable String countryCode, @PathVariable String cityName) {
+        City found = service.get(countryCode, cityName);
         return mapper.map(found, CityViewDTO.class);
     }
 

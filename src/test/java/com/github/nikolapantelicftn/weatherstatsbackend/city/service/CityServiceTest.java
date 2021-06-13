@@ -28,10 +28,11 @@ class CityServiceTest {
     private CityService service;
 
     private static final String CITY_NAME = "City Name";
+    private static final String COUNTRY_CODE = "CC";
 
     @Test
     void create_Success() {
-        City expected = new City(CITY_NAME);
+        City expected = new City(CITY_NAME, COUNTRY_CODE);
 
         Mockito.when(repository.save(expected)).thenReturn(expected);
 
@@ -45,7 +46,7 @@ class CityServiceTest {
     @Test
     void create_CityExists() {
         final Long id = 1L;
-        City newCity = new City(id, CITY_NAME);
+        City newCity = new City(id, CITY_NAME, COUNTRY_CODE);
 
         Mockito.when(repository.existsById(id)).thenReturn(true);
 
@@ -63,27 +64,27 @@ class CityServiceTest {
 
     @Test
     void getByCityName_Success() {
-        City expected = new City(CITY_NAME);
+        City expected = new City(CITY_NAME, COUNTRY_CODE);
 
-        Mockito.when(repository.findByCityName(CITY_NAME)).thenReturn(Optional.of(expected));
+        Mockito.when(repository.findByCountryCodeAndName(COUNTRY_CODE, CITY_NAME)).thenReturn(Optional.of(expected));
 
-        City result = service.get(CITY_NAME);
+        City result = service.get(COUNTRY_CODE, CITY_NAME);
 
         assertEquals(expected, result);
     }
 
     @Test
     void getByCityName_NotExists() {
-        Mockito.when(repository.findByCityName(CITY_NAME)).thenReturn(Optional.empty());
+        Mockito.when(repository.findByCountryCodeAndName(COUNTRY_CODE, CITY_NAME)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class,
-                () -> service.get(CITY_NAME)
+                () -> service.get(COUNTRY_CODE, CITY_NAME)
         );
     }
 
     @Test
     void getAll_Success() {
-        List<City> expected = List.of(new City(CITY_NAME));
+        List<City> expected = List.of(new City(CITY_NAME, COUNTRY_CODE));
         Mockito.when(repository.findAllSorted()).thenReturn(expected);
 
         List<City> result = service.get();

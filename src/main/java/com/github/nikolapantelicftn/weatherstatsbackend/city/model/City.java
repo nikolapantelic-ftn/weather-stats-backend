@@ -21,18 +21,21 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String countryCode;
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<DayReport> dayReports = new ArrayList<>();
 
     protected City() { }
 
-    public City(String name) {
+    public City(String name, String countryCode) {
         this.name = name;
+        this.countryCode = countryCode;
     }
 
-    public City(Long id, String name) {
+    public City(Long id, String name, String countryCode) {
         this.id = id;
         this.name = name;
+        this.countryCode = countryCode;
     }
 
     public Long getId() {
@@ -41,6 +44,18 @@ public class City {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public List<DayReport> getDayReports() {

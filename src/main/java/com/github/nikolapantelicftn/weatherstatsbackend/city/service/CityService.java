@@ -33,8 +33,8 @@ public class CityService {
     public void initCities() {
         log.info("Initializing cities.");
 
-        List<String> cityNames = properties.getCities();
-        cityNames.forEach(cityName -> create(new City(cityName)));
+        List<City> cities = properties.getCities();
+        cities.forEach(this::create);
 
         log.info("Finished initializing cities");
     }
@@ -49,11 +49,11 @@ public class CityService {
     }
 
     @Transactional(readOnly = true)
-    public City get(String cityName) {
+    public City get(String countryCode, String cityName) {
         Objects.requireNonNull(cityName);
         log.info("Fetching city with name '{}'", cityName);
 
-        return repository.findByCityName(cityName)
+        return repository.findByCountryCodeAndName(countryCode, cityName)
                 .orElseThrow(() -> new EntityNotFoundException("City not found."));
     }
 
