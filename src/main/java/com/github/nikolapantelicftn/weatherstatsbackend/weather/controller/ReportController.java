@@ -1,8 +1,8 @@
-package com.github.nikolapantelicftn.weatherstatsbackend.temperature.controller;
+package com.github.nikolapantelicftn.weatherstatsbackend.weather.controller;
 
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.controller.dto.DayReportViewDTO;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.service.ReportService;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.controller.dto.DayReportViewDTO;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.DayReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.service.ReportService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;

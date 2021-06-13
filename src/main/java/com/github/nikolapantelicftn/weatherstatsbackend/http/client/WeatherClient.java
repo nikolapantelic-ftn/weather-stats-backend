@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.nikolapantelicftn.weatherstatsbackend.config.ConfigProperties;
 import com.github.nikolapantelicftn.weatherstatsbackend.exceptions.ApiException;
 import com.github.nikolapantelicftn.weatherstatsbackend.http.deserializer.WeatherResponseDeserializer;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.DayReport;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;

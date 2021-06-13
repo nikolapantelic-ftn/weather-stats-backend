@@ -1,7 +1,7 @@
 package com.github.nikolapantelicftn.weatherstatsbackend.city.model;
 
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.Temperature;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.DayReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.Temperature;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

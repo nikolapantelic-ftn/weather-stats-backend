@@ -1,6 +1,6 @@
 package com.github.nikolapantelicftn.weatherstatsbackend.city.controller.dto;
 
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.Temperature;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.Temperature;
 
 import java.util.List;
 

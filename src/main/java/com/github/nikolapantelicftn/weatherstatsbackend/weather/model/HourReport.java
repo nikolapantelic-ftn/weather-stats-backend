@@ -1,4 +1,4 @@
-package com.github.nikolapantelicftn.weatherstatsbackend.temperature.model;
+package com.github.nikolapantelicftn.weatherstatsbackend.weather.model;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

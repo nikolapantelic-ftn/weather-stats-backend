@@ -1,6 +1,6 @@
-package com.github.nikolapantelicftn.weatherstatsbackend.temperature.repository;
+package com.github.nikolapantelicftn.weatherstatsbackend.weather.repository;
 
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.DayReport;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

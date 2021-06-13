@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.github.nikolapantelicftn.weatherstatsbackend.http.client.WeatherResponse;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.HourReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.DayReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.HourReport;
 
 import java.io.IOException;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package com.github.nikolapantelicftn.weatherstatsbackend.temperature.model;
+package com.github.nikolapantelicftn.weatherstatsbackend.weather.model;
 
 import com.github.nikolapantelicftn.weatherstatsbackend.city.model.City;
 
@@ -27,6 +27,12 @@ public class DayReport {
     private List<HourReport> hourReports;
 
     public DayReport(LocalDate date, List<HourReport> hourReports) {
+        this.date = date;
+        this.hourReports = hourReports;
+    }
+
+    public DayReport(Long id, LocalDate date, List<HourReport> hourReports) {
+        this.id = id;
         this.date = date;
         this.hourReports = hourReports;
     }

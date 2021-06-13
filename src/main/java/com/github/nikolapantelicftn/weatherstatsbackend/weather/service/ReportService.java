@@ -1,11 +1,11 @@
-package com.github.nikolapantelicftn.weatherstatsbackend.temperature.service;
+package com.github.nikolapantelicftn.weatherstatsbackend.weather.service;
 
 import com.github.nikolapantelicftn.weatherstatsbackend.city.model.City;
 import com.github.nikolapantelicftn.weatherstatsbackend.city.service.CityService;
 import com.github.nikolapantelicftn.weatherstatsbackend.exceptions.EntityExistsException;
 import com.github.nikolapantelicftn.weatherstatsbackend.http.client.WeatherClient;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.repository.DayReportRepository;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.DayReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.repository.DayReportRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

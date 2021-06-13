@@ -1,6 +1,6 @@
 package com.github.nikolapantelicftn.weatherstatsbackend.http.client;
 
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.DayReport;
 
 import java.util.List;
 

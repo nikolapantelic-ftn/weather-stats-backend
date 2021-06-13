@@ -1,7 +1,7 @@
-package com.github.nikolapantelicftn.weatherstatsbackend.temperature.controller.dto;
+package com.github.nikolapantelicftn.weatherstatsbackend.weather.controller.dto;
 
 import com.github.nikolapantelicftn.weatherstatsbackend.city.controller.dto.CityViewDTO;
-import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.Temperature;
+import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.Temperature;
 
 import java.time.LocalDate;
 import java.util.List;
