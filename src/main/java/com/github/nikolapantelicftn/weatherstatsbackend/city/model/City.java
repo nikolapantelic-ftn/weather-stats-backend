@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +22,7 @@ public class City {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<DayReport> dayReports;
+    private List<DayReport> dayReports = new ArrayList<>();
 
     protected City() { }
 
@@ -44,6 +45,10 @@ public class City {
 
     public List<DayReport> getDayReports() {
         return dayReports;
+    }
+
+    public void clearDayReports() {
+        dayReports = new ArrayList<>();
     }
 
     public Temperature getAverage() {

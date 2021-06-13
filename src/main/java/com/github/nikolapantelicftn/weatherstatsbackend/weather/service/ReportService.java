@@ -17,6 +17,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ReportService {
@@ -45,10 +46,19 @@ public class ReportService {
 
     private void saveCityDayReports(City city) {
         List<DayReport> dayReports = client.getForCity(city.getName());
+        clearCityReports(city);
         dayReports.forEach(report -> {
             report.setCity(city);
             create(report);
         });
+    }
+
+    private void clearCityReports(City city) {
+        List<Long> idsToClear = city.getDayReports().stream()
+                .map(DayReport::getId).collect(Collectors.toList());
+        city.clearDayReports();
+        deleteAll(idsToClear);
+        log.info("Cleared previous day reports for city '{}'", city.getName());
     }
 
     @Transactional(readOnly = true)
@@ -88,9 +98,14 @@ public class ReportService {
     public DayReport create(DayReport newReport) {
         Objects.requireNonNull(newReport);
         if (newReport.getId() != null && repository.existsById(newReport.getId())) {
-            throw new EntityExistsException("Day report exists");
+            throw new EntityExistsException("Day already report exists.");
         }
         return repository.save(newReport);
+    }
+
+    @Transactional
+    public void deleteAll(List<Long> ids) {
+        repository.deleteAllById(ids);
     }
 
 }

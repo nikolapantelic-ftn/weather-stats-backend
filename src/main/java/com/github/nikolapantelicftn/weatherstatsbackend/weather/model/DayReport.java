@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +27,7 @@ public class DayReport {
     @ManyToOne(cascade = CascadeType.MERGE)
     private City city;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<HourReport> hourReports;
+    private List<HourReport> hourReports = new ArrayList<>();
 
     public DayReport(LocalDate date, List<HourReport> hourReports) {
         this.date = date;
