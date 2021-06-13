@@ -44,10 +44,6 @@ public class City {
         return dayReports;
     }
 
-    public void setDayReports(List<DayReport> dayReports) {
-        this.dayReports = dayReports;
-    }
-
     public Temperature getAverage() {
         double average = this.dayReports.stream().mapToDouble(report -> report.getAverage().getValue()).average().orElse(0);
         return new Temperature(average);

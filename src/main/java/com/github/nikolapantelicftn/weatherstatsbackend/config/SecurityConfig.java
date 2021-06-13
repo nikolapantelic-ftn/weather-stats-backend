@@ -13,8 +13,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .addMapping("/**")
                 .allowedOrigins("http://localhost:4200")
                 .allowedHeaders("*")
-                .allowedMethods("GET", "POST", "OPTIONS");
+                .allowedMethods("GET", "OPTIONS");
     }
-
 
 }

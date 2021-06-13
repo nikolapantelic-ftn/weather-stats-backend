@@ -59,6 +59,8 @@ public class ReportService {
     @Transactional(readOnly = true)
     public List<DayReport> get(List<LocalDate> dates) {
         Objects.requireNonNull(dates);
+        log.info("Fetching reports by dates.");
+
         return repository.findByDateIn(dates);
     }
 
@@ -66,6 +68,8 @@ public class ReportService {
     public List<DayReport> get(LocalDate from, LocalDate to) {
         Objects.requireNonNull(from);
         Objects.requireNonNull(to);
+        log.info("Fetching all city weather reports from {} to {}", from, to);
+
         List<LocalDate> dates = getDatesFromInterval(from, to);
         return get(dates);
     }

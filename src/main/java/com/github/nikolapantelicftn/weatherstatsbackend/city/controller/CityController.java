@@ -31,7 +31,7 @@ public class CityController {
         this.mapper = mapper;
     }
 
-    @Operation(summary = "Gets all cities")
+    @Operation(summary = "Gets all cities with their weather reports")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Array of cities", content = {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(
@@ -47,6 +47,14 @@ public class CityController {
                 .collect(Collectors.toList());
     }
 
+    @Operation(summary = "Gets a city and its weather reports by city name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found city", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = CityViewDTO.class)
+                    )
+            })
+    })
     @GetMapping("{cityName}")
     public CityViewDTO get(@PathVariable String cityName) {
         City found = service.get(cityName);

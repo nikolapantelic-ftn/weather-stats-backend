@@ -51,12 +51,15 @@ public class CityService {
     @Transactional(readOnly = true)
     public City get(String cityName) {
         Objects.requireNonNull(cityName);
+        log.info("Fetching city with name '{}'", cityName);
+
         return repository.findByCityName(cityName)
                 .orElseThrow(() -> new EntityNotFoundException("City not found."));
     }
 
     @Transactional(readOnly = true)
     public List<City> get() {
+        log.info("Fetching all cities.");
         return repository.findAll();
     }
 

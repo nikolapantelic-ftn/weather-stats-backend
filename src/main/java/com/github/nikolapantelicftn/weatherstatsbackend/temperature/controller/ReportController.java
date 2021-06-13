@@ -3,7 +3,14 @@ package com.github.nikolapantelicftn.weatherstatsbackend.temperature.controller;
 import com.github.nikolapantelicftn.weatherstatsbackend.temperature.controller.dto.DayReportViewDTO;
 import com.github.nikolapantelicftn.weatherstatsbackend.temperature.model.DayReport;
 import com.github.nikolapantelicftn.weatherstatsbackend.temperature.service.ReportService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +32,14 @@ public class ReportController {
         this.mapper = mapper;
     }
 
+    @Operation(summary = "Gets daily reports within a time interval specified by query parameters")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Array of daily reports", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(
+                            schema = @Schema(implementation = DayReportViewDTO.class)
+                    ))
+            })
+    })
     @GetMapping
     public List<DayReportViewDTO> get(@RequestParam String from, @RequestParam String to) {
         List<DayReport> found = service.get(LocalDate.parse(from), LocalDate.parse(to));
