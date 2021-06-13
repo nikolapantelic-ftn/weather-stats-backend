@@ -44,7 +44,7 @@ class CityServiceTest {
 
     @Test
     void create_CityExists() {
-        Long id = 1L;
+        final Long id = 1L;
         City newCity = new City(id, CITY_NAME);
 
         Mockito.when(repository.existsById(id)).thenReturn(true);

@@ -3,6 +3,7 @@ package com.github.nikolapantelicftn.weatherstatsbackend.weather.controller.dto;
 import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.Temperature;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class HourReportViewDTO {
 
@@ -32,6 +33,20 @@ public class HourReportViewDTO {
 
     public void setTemperature(Temperature temperature) {
         this.temperature = temperature;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HourReportViewDTO that = (HourReportViewDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(time, that.time)
+                && Objects.equals(temperature, that.temperature);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, time, temperature);
     }
 
 }

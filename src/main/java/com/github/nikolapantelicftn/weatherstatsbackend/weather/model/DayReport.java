@@ -4,6 +4,7 @@ import com.github.nikolapantelicftn.weatherstatsbackend.city.model.City;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class DayReport {
@@ -23,7 +25,7 @@ public class DayReport {
     @JoinColumn(name = "city_id")
     @ManyToOne(cascade = CascadeType.MERGE)
     private City city;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<HourReport> hourReports;
 
     public DayReport(LocalDate date, List<HourReport> hourReports) {
@@ -64,6 +66,21 @@ public class DayReport {
 
     public List<HourReport> getHourReports() {
         return hourReports;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DayReport dayReport = (DayReport) o;
+        return Objects.equals(id, dayReport.id) && Objects.equals(date, dayReport.date)
+                && Objects.equals(city, dayReport.city)
+                && hourReports.containsAll(dayReport.hourReports) && dayReport.hourReports.containsAll(hourReports);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, city, hourReports);
     }
 
 }

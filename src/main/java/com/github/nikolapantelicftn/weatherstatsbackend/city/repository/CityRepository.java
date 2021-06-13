@@ -13,7 +13,8 @@ public interface CityRepository extends JpaRepository<City, Long> {
     @Query("select c from City c where lower(c.name)=lower(:cityName)")
     Optional<City> findByCityName(@Param("cityName") String cityName);
 
-    @Query("select c from City c left join c.dayReports dr left join dr.hourReports hr group by c order by avg(hr.temperature.value) desc")
+    @Query("select c from City c left join c.dayReports dr left join dr.hourReports hr" +
+            " group by c order by avg(hr.temperature.value) desc")
     List<City> findAllSorted();
 
 }

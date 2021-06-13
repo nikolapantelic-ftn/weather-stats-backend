@@ -5,6 +5,7 @@ import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.Temperatur
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class CityDayReportDTO {
 
@@ -43,6 +44,21 @@ public class CityDayReportDTO {
 
     public void setHourReports(List<HourReportViewDTO> hourReports) {
         this.hourReports = hourReports;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CityDayReportDTO that = (CityDayReportDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(date, that.date)
+                && Objects.equals(average, that.average) && hourReports.containsAll(that.hourReports)
+                && that.hourReports.containsAll(hourReports);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, average, hourReports);
     }
 
 }

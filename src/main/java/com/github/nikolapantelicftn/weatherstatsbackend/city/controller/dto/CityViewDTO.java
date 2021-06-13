@@ -3,6 +3,7 @@ package com.github.nikolapantelicftn.weatherstatsbackend.city.controller.dto;
 import com.github.nikolapantelicftn.weatherstatsbackend.weather.model.Temperature;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CityViewDTO {
 
@@ -43,6 +44,21 @@ public class CityViewDTO {
 
     public void setDayReports(List<CityDayReportDTO> dayReports) {
         this.dayReports = dayReports;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CityViewDTO that = (CityViewDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name)
+                && Objects.equals(average, that.average) && dayReports.containsAll(that.dayReports)
+                && that.dayReports.containsAll(dayReports);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, average, dayReports);
     }
 
 }

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 public class HourReport {
@@ -39,6 +40,20 @@ public class HourReport {
 
     public Temperature getTemperature() {
         return temperature;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HourReport that = (HourReport) o;
+        return Objects.equals(id, that.id) && Objects.equals(time, that.time)
+                && Objects.equals(temperature, that.temperature);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, time, temperature);
     }
 
 }
